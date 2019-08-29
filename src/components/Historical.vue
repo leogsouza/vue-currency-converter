@@ -82,6 +82,6 @@ export default {
 }
 </script>
 
-<stylescoped>
+<style scoped>
 
 </style>
