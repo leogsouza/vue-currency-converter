@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-drawer :md-active.sync="sowNavigation" md-swipeable>
+    <md-drawer :md-active.sync="showNavigation" md-swipeable>
       <md-toolbar class="md-transparent" md-elevation="0">
         <span class="md-title">Currency Info</span>
       </md-toolbar>

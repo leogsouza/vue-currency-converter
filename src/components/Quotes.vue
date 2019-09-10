@@ -29,7 +29,6 @@
 
 <script>
 
-import currencies from '../currencies'
 import { APIURL } from '../urls'
 import * as moment from 'moment'
 const request = require('superagent')

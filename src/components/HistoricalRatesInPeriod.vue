@@ -6,23 +6,29 @@
             <form @submit.prevent="getHistoricalRate">
                 <div class="md-layout-item">
                     <label>Start Date</label>
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
                     <md-datepicker 
-                        v-model="form.startDate" v-validate="'required'"
+                        v-model="form.startDate"
                         name="date" :md-disabled-dates="invalidStartDates"
                     ></md-datepicker>
+                    </ValidatorProvider>
                     <label>End Date</label>
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
                     <md-datepicker 
-                        v-model="form.endDate" v-validate="'required'"
+                        v-model="form.endDate"
                         name="date" :md-disabled-dates="invalidEndDates"
                     ></md-datepicker>
+                    </ValidatorProvider>
                     <md-field :class="{'md-invalid': errors.first('baseCurrency')}">
                         <label for="baseCurrency">Currency Symbol</label>
+                        <ValidatorProvider rules="required" v-slot="{ errors }">
                         <md-select v-model="form.baseCurrency"
-                            name="baseCurrency" v-validate="'required'">
+                            name="baseCurrency">
                             <md-option :value="s.code" :key="s.code"
                                 v-for="s in symbols">{{s.name}}</md-option>
                         </md-select>
                         <span class="md-error">{{errors.first('baseCurrency')}}</span>
+                        </ValidatorProvider>
                     </md-field>                    
                 </div>
                 <md-button class="md-dense md-raised md-primary" type="submit">

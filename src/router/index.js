@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import VeeValidate from 'vee-validate'
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full'
 import Quotes from '@/components/Quotes'
 import Convert from '@/components/Convert'
 import Drawer from '@/components/Drawer'
@@ -15,10 +15,11 @@ import 'vue-material/dist/theme/default.css'
 
 Vue.component('drawer', Drawer)
 Vue.component('line-graph', LineGraph)
+Vue.component('ValidationProvider', ValidationProvider)
 
 Vue.use(VueMaterial)
 Vue.use(Router)
-Vue.use(VeeValidate)
+
 
 Vue.filter('currencyName', (value) => currencies[value] ? 
         currencies[value].name : value)

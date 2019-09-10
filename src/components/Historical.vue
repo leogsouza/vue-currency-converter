@@ -6,17 +6,21 @@
             <form @submit.prevent="getHistoricalRate">
                 <div class="md-layout-item">
                     <label>Date</label>
-                    <md-datepicker v-model="form.date" v-validate="'required'"
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
+                    <md-datepicker v-model="form.date"
                         name="date" :md-disabled-dates="futureDates"></md-datepicker>
+                    </ValidatorProvider>
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
                     <md-field :class="{'md-invalid' : errors.first('baseCurrency')}">
                         <label for="baseCurrency">Currency Symbol</label>
-                        <md-select v-model="form.baseCurrency" name="baseCurrency"
-                            v-validate="'required'">
+                        <md-select v-model="form.baseCurrency" name="baseCurrency">
                             <md-option :value="s.code" v-for="s in symbols"
                              :key="s.code">{{s.name}}</md-option>
                         </md-select>
                         <span class="md-error">{{ errors.first('baseCurrency') }}</span>
                     </md-field>
+                    </ValidatorProvider>
+                    
                 </div>
                 <md-button class="md-dense md-raised md-primary" type="submit">Find Rate</md-button>
             </form>
@@ -34,7 +38,7 @@
 
 import currencies from '../currencies'
 import { APIURL } from '../urls'
-import * as moment from moment
+import * as moment from 'moment'
 const request = require('superagent')
 
 export default {

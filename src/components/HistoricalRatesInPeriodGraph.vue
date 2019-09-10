@@ -6,31 +6,39 @@
       <form @submit.prevent="getHistoricalRate">
         <div class="md-layout-item">
           <label>Start Date</label>
+          <ValidatorProvider rules="required" v-slot="{ errors }">
           <md-datepicker v-model="form.startDate"
-            v-validate="'required'" name="date"
+            name="date"
             :md-disabled-dates="invalidStartDates"
           ></md-datepicker>
+          </ValidatorProvider>
           <label>End Date</label>
+          <ValidatorProvider rules="required" v-slot="{ errors }">
           <md-datepicker v-model="form.EndDate"
-            v-validate="'required'" name="date"
+            name="date"
             :md-disabled-dates="invalidEndDates"></md-datepicker>
+          </ValidatorProvider>
           <md-field :class="{'md-invalid': errors.first('from') }">
             <label for="from">Currency to Convert From</label>
+            <ValidatorProvider rules="required" v-slot="{ errors }">
             <md-select v-model="form.from" name="from"
-              v-validate="'required'">
+              >
               <md-option :value="s.code" v-for="s in fromSymbols"
                 :key="s.code">{{s.name}}</md-option>
             </md-select>
             <span class="md-error">{{errors.first('from')}}</span>
+            </ValidatorProvider>
           </md-field>
           <md-field :class="{'md-invalid': errors.first('to') }">
             <label for="to">Currency to Convert To</label>
+            <ValidatorProvider rules="required" v-slot="{ errors }">
             <md-select v-model="form.to" name="to"
-              v-validate="'required'">
+              >
               <md-option :value="s.code" v-for="s in toSymbols"
                 :key="s.code">{{s.name}}</md-option>
             </md-select>
             <span class="md-error">{{errors.first('to')}}</span>
+            </ValidatorProvider>
           </md-field>
         </div>
         <md-button class="md-dense md-raised md-primary" type="submit">
@@ -77,12 +85,12 @@ export default {
   },
   watch: {
     form: {
-      handler(val) {
+      handler() {
         if (!this.form) {
           this.toSymbols = this.symbols
           this.fromSymbols = this.symbols
           return
-        }
+        } 
 
         if (this.form.from) {
           this.toSymbols = this.symbols.filter(s => s.code != this.form.from)

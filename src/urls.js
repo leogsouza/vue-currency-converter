@@ -1,3 +1,3 @@
-const APIURL = 'https://api.exchangerates.io'
+const APIURL = 'https://api.exchangeratesapi.io'
 
 export { APIURL }

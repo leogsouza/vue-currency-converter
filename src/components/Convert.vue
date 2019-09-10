@@ -5,29 +5,35 @@
             <h1 class="center">Convert Currency</h1>
             <form @submit.prevent="convert">
                 <div class="md-layout-item">
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
                     <md-field :class="{'md-invalid': errors.first('price') }">
                         <label>Amount of Currency to Convert From</label>
-                        <md-input v-model="form.price" v-validate="'required'"
+                        <md-input v-model="form.price"
                             name="price"></md-input>
                             <span class="md-error">{{ errors.first('price') }}</span>
                     </md-field>
+                    </ValidatorProvider>
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
                     <md-field :class="{'md-invalid': errors.first('from')}">
                         <label for="from">Currency to Convert From</label>
-                        <md-select v-model="form.from" name="from" v-validate="'required'">
+                        <md-select v-model="form.from" name="from">
                             <md-option :value="s.code" v-for="s in fromSymbols"
                                 :key="s.code">{{s.name}}</md-option>
                         </md-select>
                         <span class="md-error">{{errors.first('from')}}</span>
                     </md-field>
+                    </ValidatorProvider>
+                    <ValidatorProvider rules="required" v-slot="{ errors }">
                     <md-field :class="{'md-invalid': errors.first('to')}">
                         <label for="to">Currency to Convert To</label>
-                        <md-select v-model="form.to" name="to" v-validate="'required'">
+                        <md-select v-model="form.to" name="to">
                             <md-option :value="s.code" v-for="s in toSymbols" :key="s.code">
                                 {{s.name}}                                
                             </md-option>
                         </md-select>
                         <span class="md-error">{{errors.first('to')}}</span>
                     </md-field>
+                    </ValidatorProvider>
                 </div>
                 <md-button class="md-dense md-raised md-primary" type="submit">
                     Convert
@@ -70,7 +76,7 @@ export default {
     },
     watch: {
         form: {
-            handler(val) {
+            handler() {
                 if (!this.form) {
                     this.toSymbols = this.symbols
                     this.fromSymbols = this.symbols
