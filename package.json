@@ -10,7 +10,7 @@
   "dependencies": {
     "chart.js": "^2.8.0",
     "core-js": "^2.6.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "superagent": "^5.1.0",
     "vee-validate": "^3.0.2",
     "vue": "^2.6.10",
